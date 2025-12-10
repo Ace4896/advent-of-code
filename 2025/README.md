@@ -9,6 +9,13 @@ This year, I wrote my solutions in Rust. I wanted to practice it as I haven't us
 
 ## Notes
 
+I used hints on these problems:
+
+- Day 9 Part 2
+- Day 10 Part 2
+
+Everything else was solved without looking at any hints / sample answers.
+
 ### Day 1
 
 Got confused by the wrapping addition/subtraction LOL. But otherwise it was OK.
@@ -57,6 +64,10 @@ But I have no idea how to solve part 2... not very good at this type of problem.
 
 ### Day 10
 
-Feels like Day 9 all over again... part 1 was perfectly fine to brute force and I have no clue how to solve part 2 LOL.
+Feels like Day 9 all over again...
 
 This is the first day where I found manual parsing to be too tedious, so I added [`regex`](https://crates.io/crates/regex) to help me out. Other languages come with regex in their standard library, so I'd say this is perfectly fine.
+
+Part 1 was solvable with breadth-first search. Part 2 can technically be solved with the same approach, but it's too slow and eats up several gigabytes of memory. Out of curiosity, I tried solving each machine input in parallel (16 cores / 32 threads) and it went through my PC's 32 GB of RAM within seconds haha.
+
+I eventually solved part 2 using linear programming, though I passed it to the [`microlp`](https://crates.io/crates/microlp) crate for the actual solution. Apparently, I've never used linear programming before? Or at least I can't remember anything about it from university...
