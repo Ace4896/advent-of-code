@@ -3,6 +3,10 @@ name = "advent-of-code-2025"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+name = "advent_of_code_2025"
+path = "src/lib.rs"
+
 [[bin]]
 name = "day1"
 path = "src/day1.rs"
@@ -38,6 +42,10 @@ path = "src/day8.rs"
 [[bin]]
 name = "day9"
 path = "src/day9.rs"
+
+[[bin]]
+name = "day10"
+path = "src/day10.rs"
 
 [dependencies]
 geo = "0.32.0"
