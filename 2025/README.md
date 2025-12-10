@@ -54,3 +54,9 @@ My merging function isn't very efficient though... every time I remove the 1-2 m
 Part 1 is fine - brute force is enough to solve it.
 
 But I have no idea how to solve part 2... not very good at this type of problem. Ended up brute forcing again using the [`geo`](https://crates.io/crates/geo) crate to check if the rectangle was inside the input polygon.
+
+### Day 10
+
+Feels like Day 9 all over again... part 1 was perfectly fine to brute force and I have no clue how to solve part 2 LOL.
+
+This is the first day where I found manual parsing to be too tedious, so I added [`regex`](https://crates.io/crates/regex) to help me out. Other languages come with regex in their standard library, so I'd say this is perfectly fine.
