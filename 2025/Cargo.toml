@@ -51,6 +51,10 @@ path = "src/day10.rs"
 name = "day11"
 path = "src/day11.rs"
 
+[[bin]]
+name = "day12"
+path = "src/day12.rs"
+
 [dependencies]
 geo = "0.32.0"
 microlp = "0.2.11"
