@@ -71,3 +71,7 @@ This is the first day where I found manual parsing to be too tedious, so I added
 Part 1 was solvable with breadth-first search. Part 2 can technically be solved with the same approach, but it's too slow and eats up several gigabytes of memory. Out of curiosity, I tried solving each machine input in parallel (16 cores / 32 threads) and it went through my PC's 32 GB of RAM within seconds haha.
 
 I eventually solved part 2 using linear programming, though I passed it to the [`microlp`](https://crates.io/crates/microlp) crate for the actual solution. Apparently, I've never used linear programming before? Or at least I can't remember anything about it from university...
+
+### Day 11
+
+I initially solved part 1 with basic BFS, but as expected, it's too memory intensive for part 2. Then I adjusted the path counting algorithm so it works in a memoized manner, making it much more efficient to run.
