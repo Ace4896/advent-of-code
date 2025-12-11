@@ -18,6 +18,12 @@ fn main() {
     println!("Part 2: {}", solve_part_2(input_path));
 }
 
+const DAC_NODE: &'static str = "dac";
+const FFT_NODE: &'static str = "fft";
+const OUT_NODE: &'static str = "out";
+const SVR_NODE: &'static str = "svr";
+const YOU_NODE: &'static str = "you";
+
 fn parse_input(mut input_lines: impl Iterator<Item = String>) -> HashMap<String, Vec<String>> {
     let mut adjacency_list = HashMap::new();
     while let Some(line) = input_lines.next().filter(|l| !l.is_empty()) {
@@ -39,7 +45,7 @@ fn count_paths(
     start_node: &str,
     end_node: &str,
     adjacency_list: &HashMap<String, Vec<String>>,
-) -> u32 {
+) -> u64 {
     // Invert the graph, filtering to nodes that are relevant to search
     let mut unexplored_nodes: Vec<&str> = vec![start_node];
     let mut inverted_adjacency_list: HashMap<&str, Vec<&str>> = HashMap::new();
@@ -64,7 +70,7 @@ fn count_paths(
         }
     }
 
-    // Then recursively count the total incoming paths leading to the end node
+    // Then recursively count the total incoming paths for the end node
     count_paths_inner(
         start_node,
         end_node,
@@ -77,71 +83,61 @@ fn count_paths_inner<'a>(
     root_node: &'a str,
     node: &'a str,
     inverted_adjacency_list: &HashMap<&'a str, Vec<&'a str>>,
-    memoized_counts: &mut HashMap<&'a str, u32>,
-) -> u32 {
+    memoized_counts: &mut HashMap<&'a str, u64>,
+) -> u64 {
     if node == root_node {
         // Base case (to allow recursion to complete)
         1
     } else if let Some(count) = memoized_counts.get(&node) {
         // Already calculated for this node
         *count
-    } else {
-        if let Some(parent_nodes) = inverted_adjacency_list.get(&node) {
-            // Sum the total from each parent node and cache value
-            let mut total = 0;
+    } else if let Some(parent_nodes) = inverted_adjacency_list.get(&node) {
+        // Sum the total from each parent node and cache value
+        let mut total = 0;
 
-            for parent_node in parent_nodes {
-                total += count_paths_inner(
-                    root_node,
-                    parent_node,
-                    inverted_adjacency_list,
-                    memoized_counts,
-                );
-            }
-
-            memoized_counts.insert(node, total);
-            total
-        } else {
-            0
+        for parent_node in parent_nodes {
+            total += count_paths_inner(
+                root_node,
+                parent_node,
+                inverted_adjacency_list,
+                memoized_counts,
+            );
         }
+
+        memoized_counts.insert(node, total);
+        total
+    } else {
+        0
     }
 }
 
 /// Counts how many paths there are from 'you' to 'out'.
-fn solve_part_1(input_path: &str) -> u32 {
-    const START_NODE: &'static str = "you";
-    const END_NODE: &'static str = "out";
-
+fn solve_part_1(input_path: &str) -> u64 {
     let input_lines = read_lines(input_path);
     let adjacency_list = parse_input(input_lines);
 
-    count_paths(START_NODE, END_NODE, &adjacency_list)
+    count_paths(YOU_NODE, OUT_NODE, &adjacency_list)
 }
 
 /// Counts how many paths there are from 'svr' to 'out' which include 'dac' and 'fft'.
 fn solve_part_2(input_path: &str) -> u64 {
-    const START_NODE: &'static str = "svr";
-    const DAC_NODE: &'static str = "dac";
-    const FFT_NODE: &'static str = "fft";
-    const END_NODE: &'static str = "out";
-
     let input_lines = read_lines(input_path);
     let adjacency_list = parse_input(input_lines);
 
     // Input guarantees that there are no loops in the graph
     // This means that when both dac and fft are visited, the order they're reached is always the same
-    let path_count_dac_fft = count_paths(DAC_NODE, FFT_NODE, &adjacency_list) as u64;
+    let path_count_dac_fft = count_paths(DAC_NODE, FFT_NODE, &adjacency_list);
     if path_count_dac_fft > 0 {
         // Paths are of form svr -> ... -> dac -> ... -> fft -> ... -> out
-        let path_count_start_dac = count_paths(START_NODE, DAC_NODE, &adjacency_list) as u64;
-        let path_count_fft_end = count_paths(FFT_NODE, END_NODE, &adjacency_list) as u64;
+        let path_count_start_dac = count_paths(SVR_NODE, DAC_NODE, &adjacency_list);
+        let path_count_fft_end = count_paths(FFT_NODE, OUT_NODE, &adjacency_list);
 
         path_count_start_dac * path_count_dac_fft * path_count_fft_end
     } else {
         // Paths are of form svr -> ... -> fft -> ... -> dac -> ... -> out
-        let path_count_start_fft = count_paths(START_NODE, FFT_NODE, &adjacency_list) as u64;
-        let path_count_fft_dac = count_paths(FFT_NODE, DAC_NODE, &adjacency_list) as u64;
-        let path_count_dac_end = count_paths(DAC_NODE, END_NODE, &adjacency_list) as u64;
+        let path_count_start_fft = count_paths(SVR_NODE, FFT_NODE, &adjacency_list);
+        let path_count_fft_dac = count_paths(FFT_NODE, DAC_NODE, &adjacency_list);
+        let path_count_dac_end = count_paths(DAC_NODE, OUT_NODE, &adjacency_list);
 
         path_count_start_fft * path_count_fft_dac * path_count_dac_end
     }
