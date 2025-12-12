@@ -14,10 +14,10 @@ fn main() {
     let input_path = &args[1];
     println!("Input File: {}", input_path);
 
-    println!("Part 1: {}", solve_part_1(input_path));
-    // println!("Part 2: {}", solve_part_2(input_path));
+    println!("Part 1: {}", solve(input_path));
 }
 
+#[allow(unused)]
 #[derive(Clone, Debug)]
 struct Present {
     cells: Vec<Vec<bool>>,
@@ -126,7 +126,7 @@ fn parse_tree_definition(input_line: &str) -> XmasTree {
 ///
 /// - All presents are 3x3
 /// - Presents don't overlap when placing them down
-fn solve_part_1(input_path: &str) -> usize {
+fn solve(input_path: &str) -> usize {
     let input_lines = read_lines(input_path);
     let (_, xmas_trees) = parse_input(input_lines);
 
