@@ -13,6 +13,7 @@ I used hints on these problems:
 
 - Day 9 Part 2
 - Day 10 Part 2
+- Day 12 Part 1
 
 Everything else was solved without looking at any hints / sample answers.
 
@@ -75,3 +76,7 @@ I eventually solved part 2 using linear programming, though I passed it to the [
 ### Day 11
 
 I initially solved part 1 with basic BFS, but as expected, it's too memory intensive for part 2. Then I adjusted the path counting algorithm so it works in a memoized manner, making it much more efficient to run.
+
+### Day 12
+
+I was concerned when I saw it was a packing problem with irregular shapes and overlaps were allowed... But after looking at hints, the expected solution was kinda anti-climactic given how complicated the example was. Shame this was the last problem for this year.
