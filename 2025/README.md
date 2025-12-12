@@ -1,21 +1,34 @@
 # Advent of Code 2025
 
-The folder contains my personal solutions for Advent of Code 2025.
+This folder contains my personal solutions for Advent of Code 2025.
 
 This year, I wrote my solutions in Rust. I wanted to practice it as I haven't used it in a while.
 
 - Install Rust Stable 1.91 or higher
 - Run `cargo run --bin dayX -- path/to/input.txt`
 
-## Notes
+## Solution Notes
 
-I used hints on these problems:
+Key:
 
-- Day 9 Part 2
-- Day 10 Part 2
-- Day 12 Part 1
+- ⭐ - Solved without external assistance (excluding `regex` crate)
+- ❗ - Used hints
+- 💼 - Used external libraries
 
-Everything else was solved without looking at any hints / sample answers.
+| Day | Part 1 | Part 2 |
+|---|---|---|
+| **1** | :star: | :star: |
+| **2** | :star: | :star: |
+| **3** | :star: | :star: |
+| **4** | :star: | :star: |
+| **5** | :star: | :star: |
+| **6** | :star: | :star: |
+| **7** | :star: | :star: |
+| **8** | :star: | :star: |
+| **9** | :star: | ❗💼 |
+| **10** | :star: | ❗💼 |
+| **11** | :star: | :star: |
+| **12** | ❗ | N/A |
 
 ### Day 1
 
@@ -80,3 +93,13 @@ I initially solved part 1 with basic BFS, but as expected, it's too memory inten
 ### Day 12
 
 I was concerned when I saw it was a packing problem with irregular shapes and overlaps were allowed... But after looking at hints, the expected solution was kinda anti-climactic given how complicated the example was. Shame this was the last problem for this year.
+
+### Conclusion
+
+Overall, it was a fun experience! This was my first Advent of Code and it's been a while since I did programming challenges like this, so it was a nice change of pace. I tried to avoid using hints + external libraries as much as possible, though I couldn't avoid them in the end.
+
+My Rust code was pretty bad at the start. I could see it gradually getting better as I remembered more of the syntax + standard library and how to handle ownership. Implementation-wise, I'd say Day 11 was my best while Day 4 was my worst.
+
+The only problems I didn't like were Day 9 Part 2 and Day 12 Part 1. Both were very difficult problems if solved generally, but upon inspecting the input, we were supposed to realise that they were crafted in a way that wants a specific, but simple algorithm.
+
+That aside, I'm looking forward to solving the challenges next year!
